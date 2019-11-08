@@ -21,9 +21,9 @@ To run this project, save it locally, open a CLI and make sure ruby is installed
 
 ### Actions
 
-l = list your saved books
-a = search for and add a new book
-q = quit
+* l = list your saved books
+* a = search for and add a new book
+* q = quit
 
 ## Technologies
 
@@ -39,4 +39,4 @@ Project created with:
 ## Running tests
 
 * Ensure RSpec is installed `gem install rspec`
-* You can run tests with the following command when in the main folder of the project (eight-light): `rspec ./spec/models/book_spec.rb`
+* You can run tests with the following command when in the root folder of the project: `rspec ./spec/models/book_spec.rb`
