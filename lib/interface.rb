@@ -3,7 +3,7 @@ require 'open-uri'
 require_relative 'book.rb'
 
 def ask_for_books
-  puts "\n> What book title would you like to add so that we can search for it?"
+  puts "\n> What book would you like to add so that we can search for it?"
   keyword = gets.chomp
   books = Book.search_books(keyword)
   while books.nil?
@@ -14,18 +14,17 @@ def ask_for_books
   books
 end
 
-def existing_list_display(books)
-  books.each_with_index do |book, position|
-    puts "#{position + 1}. #{book.title}, #{book.authors} - #{book.publisher}"
+def list_books(books)
+  books.each_with_index do |book, i|
+    publisher = book.publisher != '' ? "(#{book.publisher})" : ''
+    authors = book.authors != '' ? "by #{book.authors}" : ''
+    puts "#{i + 1}. #{book.title} #{authors} #{publisher}"
   end
 end
 
 def google_results_display(books)
   puts "\n> Here are the book results:"
-  books.each_with_index do |book, i|
-    publisher = book.publisher ? "(#{book.publisher})" : ''
-    puts "#{i + 1}. #{book.title} by #{book.authors} #{publisher}"
-  end
+  list_books(books)
 end
 
 puts "\n"
@@ -35,12 +34,14 @@ puts '*  Welcome to your books List  *'
 puts '*' + ' ' * 30 + '*'
 puts '*' * 32
 
+Book.reset_books_list
+
 action = ''
 
 until action == 'q'
-  puts "\n> You can list your books by typing l"
-  puts '> add a book through searching for one by typing a'
-  puts '> or quit by typing q'
+  puts "\n> l = list books"
+  puts '> a = search and add book'
+  puts '> q = quit'
   puts '> What would you like to do?'
   action = gets.chomp.downcase
 
@@ -48,7 +49,7 @@ until action == 'q'
   when 'l'
     books = Book.load_books
     puts "\n> You currently have #{books.length} item(s) in your list"
-    existing_list_display(books)
+    list_books(books)
 
   when 'a'
     books = ask_for_books

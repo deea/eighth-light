@@ -1,34 +1,9 @@
 {
   "books": [
     {
-      "title": "The Weight of Water",
-      "authors": "Sarah Crossan",
-      "publisher": "Bloomsbury Publishing"
-    },
-    {
-      "title": "Wind Energy Handbook",
-      "authors": "Tony Burton, David Sharpe, Nick Jenkins, Ervin Bossanyi",
-      "publisher": "John Wiley & Sons"
-    },
-    {
-      "title": "Wind Energy Handbook",
-      "authors": "Tony Burton, David Sharpe, Nick Jenkins, Ervin Bossanyi",
-      "publisher": "John Wiley & Sons"
-    },
-    {
-      "title": "The Shadow of the Wind",
-      "authors": "Carlos Ruiz Zafon",
-      "publisher": "Text Publishing"
-    },
-    {
-      "title": "The Weight of Water",
-      "authors": "Sarah Crossan",
-      "publisher": "Bloomsbury Publishing"
-    },
-    {
-      "title": "Smilla's Sense of Snow",
-      "authors": "Peter Hoeg",
-      "publisher": "Delta"
+      "title": "Magic",
+      "authors": "",
+      "publisher": "LA Marca Editura"
     }
   ]
 }

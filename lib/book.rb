@@ -4,6 +4,8 @@ require 'open-uri'
 
 # Book class
 class Book
+  FILE_PATH = File.dirname(__FILE__) + '/books.json'
+
   attr_reader :title, :authors, :publisher
   def initialize(title, authors, publisher)
     @title = title
@@ -24,7 +26,7 @@ class Book
   end
 
   def self.write_json(json)
-    File.open('books.json', 'w') do |f|
+    File.open(FILE_PATH, 'w') do |f|
       f.write JSON.pretty_generate(json)
     end
   end
@@ -42,11 +44,12 @@ class Book
 
   def self.search_books(keyword)
     json = query_google(keyword)
-    if json['items'].any?
+    if json.key?('items')
       json['items'].first(5).map do |item|
+        authors = item['volumeInfo']['authors'] ? item['volumeInfo']['authors'].join(', ') : ''
         Book.new(
           item['volumeInfo']['title'],
-          item['volumeInfo']['authors'].join(', '),
+          authors,
           item['volumeInfo']['publisher']
         )
       end
@@ -54,8 +57,7 @@ class Book
   end
 
   def self.load_json
-    filepath = 'books.json'
-    serialized_books = File.read(filepath)
+    serialized_books = File.read(FILE_PATH)
     JSON.parse(serialized_books)
   end
 
@@ -64,5 +66,15 @@ class Book
     uri = URI(url)
     response = Net::HTTP.get(uri)
     JSON.parse(response)
+  end
+
+  def self.reset_books_list
+    empty_list =
+      {
+        "books": [
+
+        ]
+      }
+    write_json(empty_list)
   end
 end
