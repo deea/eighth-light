@@ -1,5 +1,3 @@
-require 'json'
-require 'open-uri'
 require_relative 'book.rb'
 require_relative 'google_books_api'
 require_relative 'books_list'
