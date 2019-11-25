@@ -1,15 +1,20 @@
 require 'json'
 require 'open-uri'
 require_relative 'book.rb'
+require_relative 'google_books_api'
+require_relative 'books_list'
+
+GBOOKS = GoogleBooksApi.new
+BOOKS = BooksList.new(File.dirname(__FILE__) + '/books.json')
 
 def ask_for_books
   puts "\n> What book would you like to add so that we can search for it?"
   keyword = gets.chomp
-  books = Book.search_books(keyword)
+  books = GBOOKS.search_books(keyword)
   while books.nil?
     puts '> Enter a valid book title to look for'
     keyword = gets.chomp
-    books = Book.search_books(keyword)
+    books = GBOOKS.search_books(keyword)
   end
   books
 end
@@ -34,7 +39,7 @@ puts '*  Welcome to your books List  *'
 puts '*' + ' ' * 30 + '*'
 puts '*' * 32
 
-Book.reset_books_list
+BOOKS.reset_books_list
 
 action = ''
 
@@ -47,7 +52,7 @@ until action == 'q'
 
   case action
   when 'l'
-    books = Book.load_books
+    books = BOOKS.load_books
     puts "\n> You currently have #{books.length} item(s) in your list"
     list_books(books)
 
@@ -57,7 +62,7 @@ until action == 'q'
     puts "\n> Pick one to add to your list (give the number)"
     user_index = gets.chomp.to_i - 1
     book = books[user_index]
-    Book.add_book(book)
+    BOOKS.add_book(book)
     puts "\n> Your book has been added"
   when 'q'
     puts "\n> Goodbye! \n"
