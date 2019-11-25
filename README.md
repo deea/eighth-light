@@ -4,11 +4,11 @@ A project to perform a book search on Google Books API and add books to a local 
 
 ## General information about the design and assumptions
 
-For this programme I have created one main class, the Book class and an interface file.
+For this programme I have created three classes: Book, BooksList and GoogleBooksApi with one interface file.
 
 When the application is launched in the CLI, the user is prompted to enter a letter describing the action they would like to take: list books, add books or quit.
 
-Based on the user's response captured, the Book class methods are applied as they are being called.
+Based on the user's response captured, the classes' methods are applied as they are being called.
 
 ## Getting started
 
@@ -39,4 +39,4 @@ Project created with:
 ## Running tests
 
 * Ensure RSpec is installed `gem install rspec`
-* You can run tests with the following command when in the root folder of the project: `rspec ./spec/models/book_spec.rb`
+* You can run tests with the following commands when in the root folder of the project: `rspec ./spec/models`
